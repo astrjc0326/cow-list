@@ -1,4 +1,4 @@
-const getCows = require('../database').getCows
+const db = require('../database')
 const express = require('express');
 const path = require('path');
 
@@ -9,7 +9,12 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.json())
 
 app.get('/api/cows', (req, res) => {
-  res.send('Hello from the server!');
+  db.getCows((err, result) => {
+    if (!err) {
+      console.log(result);
+      res.send(result);
+    }
+  })
 })
 
 app.post('/api/cows', (req, res) => {
