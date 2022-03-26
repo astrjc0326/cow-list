@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cows from './components/Cows.jsx';
+import AddCow from './components/AddCow.jsx'
 
 class App extends Component {
   constructor() {
@@ -8,7 +9,8 @@ class App extends Component {
     this.state = {
       cows: [],
       isdeplay: false,
-      deplaycow: ''
+      displaycow: '',
+      addCow: false
     }
     this.get = this.get.bind(this)
   }
@@ -21,22 +23,45 @@ class App extends Component {
     .then((res) => {
       console.log(res.data);
       this.setState({
-        cows: res.data
+        cows: res.data.reverse()
       })
+    })
+  }
+  post(cow) {
+    let url = '/api/cows'
+    axios.post(url, cow)
+    .then((res) => {
+      console.log(res)
+      console.log('created a cow')
+    })
+    this.get()
+  }
+  display(cow) {
+    console.log(cow)
+    this.setState({
+      displaycow: cow,
+      isdeplay: true
     })
   }
 
   render() {
     let display = (!this.state.isdeplay) ? 'hidden' : ''
+    let addCow = (!this.state.addCow) ? 'hidden' : ''
     return (
       <div>
         <h1>Cow List!!!</h1>
-        <div className={display}>display cow</div>
-        <button>ADD</button>
-
+        <div className={display}>
+          display cow
+          <h2>Name: {this.state.displaycow.name}</h2>
+          <h2>Description: {this.state.displaycow.description}</h2>
+          </div>
+        <button onClick={() => {this.setState({addCow: true})}}>ADD</button>
+        <div className={addCow}>
+          <AddCow addCow={this.post.bind(this)}/>
+        </div>
         <div className='cows'>
         Cow List!!!
-        <Cows cows={this.state.cows}/>
+        <Cows cows={this.state.cows} display={this.display.bind(this)}/>
         </div>
       </div>
     )
