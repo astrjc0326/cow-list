@@ -26,9 +26,23 @@ getCows = (callback) => {
   })
 }
 
+create = (cow, callback) => {
+  console.log('database', cow)
+  let qString = 'INSERT INTO cows (name, description) VALUES (?, ?)'
+  connection.query(qString, cow, (err, result) => {
+    if (!err) {
+      console.log('put cow in the database successfully')
+      callback(null, result)
+    } else {
+      console.log(err)
+    }
+  })
+}
+
 
 
 // Don't forget to export your functions!
 module.exports = {
-  getCows
+  getCows,
+  create
 };

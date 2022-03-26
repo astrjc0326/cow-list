@@ -18,7 +18,16 @@ app.get('/api/cows', (req, res) => {
 })
 
 app.post('/api/cows', (req, res) => {
-  res.send('create cows')
+  let cow = [req.body.name, req.body.description];
+  console.log('cow: ', cow)
+  db.create(cow, (err, result) => {
+    if(!err) {
+      console.log(result)
+      res.send(201)
+    } else {
+      console.log(err)
+    }
+  })
 })
 
 app.listen(PORT, () => {
