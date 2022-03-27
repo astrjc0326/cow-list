@@ -33,6 +33,7 @@ class App extends Component {
     .then((res) => {
       console.log(res)
       console.log('created a cow')
+      this.setState({addCow: false})
     })
     this.get()
   }
