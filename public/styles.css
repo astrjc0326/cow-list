@@ -2,7 +2,22 @@
   display: none;
 }
 
-body {
-  color: blue
+
+#app {
+  padding: 10px 10px 20px 10px;
+  position: absolute;
+  left: 40%
 }
 
+.display {
+  border-color: black;
+  background-color: beige;
+}
+
+.addCow {
+  background-color: bisque;
+}
+
+.edit {
+  background-color: blanchedalmond;
+}
