@@ -23,7 +23,7 @@ class AddCow extends Component {
         <input onChange={(e) => {this.setState({name: e.target.value})}}></input>
         <h3>Description</h3>
         <input onChange={(e)=>{this.setState({description: e.target.value})}}></input>
-        <button onClick={()=>{this.handleClick()}}>ADD</button>
+        <button onClick={()=>{this.handleClick()}}>Submit</button>
       </div>
     )
   }

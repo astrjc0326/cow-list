@@ -64,17 +64,18 @@ class App extends Component {
   }
 
   render() {
-    let display = (!this.state.isdeplay) ? 'hidden' : ''
-    let addCow = (!this.state.addCow) ? 'hidden' : ''
+    let display = (!this.state.isdeplay) ? 'hidden' : 'display'
+    let addCow = (!this.state.addCow) ? 'hidden' : 'addCow'
+    let addButton = (this.state.addCow) ? 'hidden' : 'addButton'
     return (
       <div>
         <h1>Cow List!!!</h1>
         <div className={display}>
-          display cow
+          <h2>Display Cow</h2>
           <h2>Name: {this.state.displaycow.name}</h2>
           <h2>Description: {this.state.displaycow.description}</h2>
           </div>
-        <button onClick={() => {this.setState({addCow: true})}}>ADD</button>
+        <button className={addButton} onClick={() => {this.setState({addCow: true})}}>ADD</button>
         <div className={addCow}>
           <AddCow addCow={this.post.bind(this)}/>
         </div>
