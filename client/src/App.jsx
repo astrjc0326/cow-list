@@ -43,6 +43,16 @@ class App extends Component {
       isdeplay: true
     })
   }
+  edit(cow) {
+    let url = `/api/cows/${cow.id}`;
+    console.log(cow)
+    axios.put(url, cow)
+    .then(res => {
+      console.log(res)
+      this.get()
+    })
+    .catch()
+  }
 
   render() {
     let display = (!this.state.isdeplay) ? 'hidden' : ''
@@ -61,7 +71,7 @@ class App extends Component {
         </div>
         <div className='cows'>
         Cow List!!!
-        <Cows cows={this.state.cows} display={this.display.bind(this)}/>
+        <Cows cows={this.state.cows} display={this.display.bind(this)} edit={this.edit.bind(this)}/>
         </div>
       </div>
     )

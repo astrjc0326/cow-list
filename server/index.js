@@ -30,6 +30,19 @@ app.post('/api/cows', (req, res) => {
   })
 })
 
+app.put('/api/cows/:id', (req, res) => {
+  let cow = [req.body.name, req.body.description, req.params.id];
+  console.log(cow);
+  db.edit(cow, (err, result) => {
+    if (!err) {
+      console.log('edited a cow')
+      res.send(200)
+    } else {
+      console.log(err)
+    }
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening at localhost:${3000}!`);
 });
