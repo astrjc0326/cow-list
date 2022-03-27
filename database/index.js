@@ -27,7 +27,6 @@ getCows = (callback) => {
 }
 
 create = (cow, callback) => {
-  console.log('database', cow)
   let qString = 'INSERT INTO cows (name, description) VALUES (?, ?)'
   connection.query(qString, cow, (err, result) => {
     if (!err) {
@@ -39,10 +38,34 @@ create = (cow, callback) => {
   })
 }
 
+edit = (cow, callback) => {
+  let qString = 'UPDATE cows SET name = ?, description = ? WHERE id = ?'
+  connection.query(qString, cow, (err, result) => {
+    if (!err) {
+      console.log('edited a cow')
+      callback(null, result)
+    } else {
+      callback(err)
+    }
+  })
+}
+
+deleteCow = (id, callback) => {
+  let qString = 'DELETE FROM cows WHERE id = ?'
+  connection.query(qString, id, (err, result) => {
+    if (!err) {
+      callback(null, result)
+    } else {
+      callback(err)
+    }
+  })
+}
 
 
 // Don't forget to export your functions!
 module.exports = {
   getCows,
-  create
-};
+  create,
+  edit,
+  deleteCow
+}

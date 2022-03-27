@@ -43,6 +43,20 @@ app.put('/api/cows/:id', (req, res) => {
   })
 })
 
+app.delete('/api/cows/:id', (req, res) => {
+  console.log('delete request')
+  let id = req.params.id;
+  console.log('id:', id)
+  db.deleteCow(id, (err, result) => {
+    if (!err) {
+      console.log(result)
+      res.send(200)
+    } else {
+      console.log(err)
+    }
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening at localhost:${3000}!`);
 });
