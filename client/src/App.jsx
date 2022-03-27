@@ -53,6 +53,14 @@ class App extends Component {
     })
     .catch()
   }
+  delete(id) {
+    let url = `/api/cows/${id}`;
+    axios.delete(url)
+    .then(res => {
+      console.log(res)
+      this.get()
+    })
+  }
 
   render() {
     let display = (!this.state.isdeplay) ? 'hidden' : ''
@@ -71,7 +79,10 @@ class App extends Component {
         </div>
         <div className='cows'>
         Cow List!!!
-        <Cows cows={this.state.cows} display={this.display.bind(this)} edit={this.edit.bind(this)}/>
+        <Cows cows={this.state.cows}
+        display={this.display.bind(this)}
+        edit={this.edit.bind(this)}
+        delete={this.delete.bind(this)}/>
         </div>
       </div>
     )

@@ -38,7 +38,7 @@ class Cows extends Component{
             })}}>
               Edit
         </button>
-        <button>X</button>
+        <button onClick={() => this.props.delete(cow.id)}>X</button>
       </div>
     ))
     let editable = (!this.state.editable) ? 'hidden' : 'edit'
